@@ -1,41 +1,38 @@
-name=an-anime-game-launcher-bin
-pkgname=an-anime-game-launcher
-version=2.3.8
-description="An Launcher for a specific anime game with auto-patching, discord rpc and time tracking"
+name="an-anime-game-launcher-bin"
+pkgname="an-anime-game-launcher"
+version="3.3.0"
+description="Launcher for a specific anime game with auto-patching, discord rpc and time tracking"
 repology=("project: an-anime-game-launcher")
-url="https://aagl.launcher.moe/dl/an_anime_game_launcher_${version//./}.tar.xz"
-hash="b254b247c4b3fc9f4b10670244ba99647fc585e85e531b737f856c8bffce08b3"
-maintainer="Marie Piontek <marie@kaifa.ch>"
+url="https://github.com/an-anime-team/an-anime-game-launcher/releases/download/${version}/anime-game-launcher"
+hash="4117bcf0bd83d3b8deb68ba52c43e0e2f7ba27013fd433ba33bbd4c84bb73503"
+depends="xdelta3 git"
+maintainer="Henryws <hwengerstickel@pm.me>"
 gives="${pkgname}"
+incompatible=("ubuntu:bionic" "ubuntu:focal" "ubuntu:jammy" "ubuntu:kinetic" "debian:stretch" "debian:buster" "debian:bullseye")
 breaks="${pkgname} ${pkgname}-deb ${pkgname}-app ${pkgname}-git"
 
-depends="libayatana-appindicator3-1 tar unzip xdelta3 cabextract git"
-
 optdepends=(
-    "mangohud: FPS Hud/GUI"
-    "gamemode: Game Optimizations"
-    "vkbasalt: Required to use custom shaders (install this and reshade-shaders-git)"
-    #"reshade-shaders-git: Required by vkBasalt config files (install this and vkbasalt)"
+  "mangohud: FPS Hud/GUI"
+  "gamemode: Game Optimizations"
+  "vkbasalt: Required to use custom shaders (install this and reshade-shaders-git)"
+  #"reshade-shaders-git: Required by vkBasalt config files (install this and vkbasalt)"
 )
 
-prepare() {
-    sudo chmod +x "${SRCDIR}/an_anime_game_launcher.AppImage" && "${SRCDIR}/an_anime_game_launcher.AppImage" --appimage-extract
-}
-
-build() {
-    true
-}
-
 install() {
-    cd "${SRCDIR}/squashfs-root"
-    sudo install -dm755 "${STOWDIR}/${name}/usr/lib/${pkgname}"
-    sudo cp -dr --no-preserve=ownership resources.neu "${STOWDIR}/${name}/usr/lib/${pkgname}"
-    sudo cp -dr --no-preserve=ownership an-anime-game-launcher "${STOWDIR}/${name}/usr/lib/${pkgname}"
-    sudo cp -dr --no-preserve=ownership public "${STOWDIR}/${name}/usr/lib/${pkgname}"
+  sudo chmod +x "anime-game-launcher"
+  sudo install -Dm755 "anime-game-launcher" "${pkgdir}/usr/bin/${pkgname}"
+  sudo mkdir -p "${pkgdir}/usr/share/applications"
+  echo '[Desktop Entry]
+Name=An Anime Game Launcher
+Icon=an-anime-game-launcher
+Exec=an-anime-game-launcher
+Type=Application
+Categories=Game;
+Terminal=false
+X-AppImage-Version=2.4.2' | sudo tee "${pkgdir}/usr/share/applications/an-anime-game-launcher.desktop" > /dev/null
+  wget -q https://raw.githubusercontent.com/an-anime-team/an-anime-game-launcher/main/assets/images/icon.png
+  sudo install -Dm644 "icon.png" "${pkgdir}/usr/share/icons/hicolor/64x64/apps/an-anime-game-launcher.png"
 
-    sudo install -Dm644 "${SRCDIR}/icon.png" "${STOWDIR}/${name}/usr/share/pixmaps/${pkgname}.png"
-    sudo install -Dm755 "${SRCDIR}/an-anime-game-launcher.sh" "${STOWDIR}/${name}/usr/bin/${pkgname}"
-    sudo install -Dm644 "${SRCDIR}/an-anime-game-launcher.desktop" -t "${STOWDIR}/${name}/usr/share/applications"
 }
 
 removescript() {

@@ -1,38 +1,30 @@
-if [[ "$(grep -Po 'ID=\K[^"]+' /etc/os-release)" == "debian" ]]; then
-    fancy_message error "This script doesn't work on Debian"
-    cleanup # Trigger pacstall cleanups
-    exit 1
-fi
-
 name="alacritty"
-version="0.10.1"
+version="0.12.0"
 repology=("project: alacritty")
 url="https://github.com/alacritty/alacritty/archive/refs/tags/v${version}.tar.gz"
 build_depends="cargo cmake pkg-config libfreetype6-dev libfontconfig1-dev libxcb-xfixes0-dev python3 gzip"
 description="A fast, cross-platform, OpenGL terminal emulator"
 maintainer="Warofzen <warofzen1@protonmail.com>"
-hash="e48d4b10762c2707bb17fd8f89bd98f0dcccc450d223cade706fdd9cfaefb308"
-prepare() {
-        true
-}
+incompatible=('debian:bullseye')
+hash="4cbf282da46c7e0f53ad552204f508904051baa324c771a0953c38484ab2359f"
 
 build() {
-        cargo build -j$(nproc) --release
+  cargo build -j"$(nproc)" --release --locked
 }
 
 install() {
-        sudo install -D target/release/alacritty -t /usr/src/pacstall/${name}/usr/bin
+  sudo install -Dm755 target/release/alacritty -t "${pkgdir}/usr/bin"
 
-        sudo install -D extra/logo/alacritty-term.svg /usr/src/pacstall/${name}/usr/share/pixmaps/Alacritty.svg
+  sudo install -Dm644 extra/logo/alacritty-term.svg "${pkgdir}/usr/share/icons/hicolor/scalable/apps/Alacritty.svg"
 
-        sudo install -D extra/linux/Alacritty.desktop -t /usr/src/pacstall/${name}/usr/share/applications
+  sudo install -Dm644 extra/linux/Alacritty.desktop -t "${pkgdir}/usr/share/applications"
 
-        sudo install -D extra/completions/alacritty.bash -t /usr/src/pacstall/${name}/usr/share/bash-completion/completions
-        sudo install -D extra/completions/alacritty.fish -t /usr/src/pacstall/${name}/usr/share/fish/completions
-        sudo install -D extra/completions/_alacritty -t /usr/src/pacstall/${name}/usr/share/zsh/vendor-completions
+  sudo install -Dm644 extra/completions/alacritty.bash "${pkgdir}/usr/share/bash-completion/completions/alacritty"
+  sudo install -Dm644 extra/completions/alacritty.fish -t "${pkgdir}/usr/share/fish/vendor_completions.d"
+  sudo install -Dm644 extra/completions/_alacritty -t "${pkgdir}/usr/share/zsh/vendor-completions"
 
-        sudo mkdir -p /usr/src/pacstall/${name}/usr/local/share/man/man1
-        gzip -c extra/alacritty.man | sudo tee /usr/src/pacstall/${name}/usr/local/share/man/man1/alacritty.1.gz > /dev/null
+  gzip -c extra/alacritty.man > alacritty.1.gz
+  sudo install -Dm644 alacritty.1.gz -t "${pkgdir}/usr/share/man/man1"
 
-        sudo install -D alacritty.yml -t /usr/src/pacstall/${name}/usr/doc/share/alacritty
+  sudo install -Dm644 alacritty.yml -t "${pkgdir}/usr/share/examples/alacritty"
 }
