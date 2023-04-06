@@ -1,6 +1,9 @@
 name="hyper-deb"
 gives="hyper"
-version="3.2.3"
+version="3.4.1"
 url="https://github.com/vercel/hyper/releases/download/v${version}/hyper_${version}_amd64.deb"
-hash="0872e41c7f6ee585a59910dae07df29aa83560c0588e8fa4bb1a6ed0e56fe04f"
-maintainer="TwilightBlood <hwengerstickel@pm.me>"
+hash="8c4cd9e8c58568d5c14bc080cdf9ffb9f30fa5672e6bd1e1045cdeb563251f56"
+arch=('amd64')
+description="HTML/JS/CSS Terminal"
+maintainer="Henryws <hwengerstickel@pm.me>"
+repology=("project: hyper-terminal")

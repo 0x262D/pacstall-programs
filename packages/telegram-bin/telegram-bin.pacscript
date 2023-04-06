@@ -8,22 +8,12 @@ maintainer="wizard-28 <wiz28@pm.me>"
 
 name="telegram-bin"
 pkgname="telegram"
-version="4.0.1"
+version="4.7.0"
 description="Telegram Desktop messaging app"
 url="https://updates.tdesktop.com/tlinux/tsetup.${version}.tar.xz"
 breaks="${pkgname} ${pkgname}-git ${pkgname}-deb ${pkgname}-app"
-hash="38506faddcda439ba3832be03829c9ce35c2b46bf7acf4488771405470ac06b3"
+hash="46711cfeb7ce37d726f7bd50b0c8ccb612f46fdc4aaf18e81c58607b5d3f3b77"
 repology=("project: telegram-desktop")
-
-pkgdir="/usr/src/pacstall/${name}"
-
-prepare() {
-  true
-}
-
-build() {
-  true
-}
 
 install() {
   # Install binary
