@@ -8,22 +8,14 @@ maintainer="wizard-28 <wiz28@pm.me>"
 
 name="dust-bin"
 pkgname="dust"
-pkgdir="${STOWDIR}/${name}"
-version="0.8.0"
+version="0.8.4"
 description="A more intuitive version of du in rust"
 url="https://github.com/bootandy/dust/releases/download/v${version}/dust-v${version}-x86_64-unknown-linux-musl.tar.gz"
 gives="${pkgname}"
 breaks="${pkgname} ${pkgname}-git ${pkgname}-deb ${pkgname}-app"
-hash="7be13b7c83d0853c1ac4a456d356b762f319955c63b6c0af5be28d44a7ae6cda"
+hash="c0e52b6cdb1b20bb5879eb3b35885915ce0932416cc02387d1bfbdc436b09ff6"
+arch=('amd64')
 repology=("project: du-dust")
-
-prepare() {
-  true
-}
-
-build() {
-  true
-}
 
 install() {
   # Install license

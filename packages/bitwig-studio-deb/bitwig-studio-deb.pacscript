@@ -1,8 +1,8 @@
 name="bitwig-studio-deb"
 repology=("project: bitwig-studio")
 gives="bitwig-studio"
-version="4.3.1"
-url="https://downloads.bitwig.com/${version}/${gives}-${version}.deb"
+version="4.4.8"
+url="https://downloads.bitwig.com/stable/${version}/${gives}-${version}.deb"
 description="Digital audio workstation for music production, remixing and live performance"
-hash="f15f2bc9bf8034f4b28ce6c02a2a12629ccd5894dd0c0f5ac7ff206775f89afb"
+hash="a9da91bc29a9e90ee571374e2041de40a00038bb49c6cf3aee06a9a29c9e1ee7"
 maintainer="Zahrun <Zahrun@github.com>"

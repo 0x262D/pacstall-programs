@@ -1,8 +1,8 @@
 name="discord-ptb-deb"
 gives="discord-ptb"
-version="0.0.30"
+version="0.0.38"
 url="https://dl-ptb.discordapp.net/apps/linux/${version}/${gives}-${version}.deb"
 description="Chat for Communities and Friends - Public Test Build"
-hash="f5a2f6188de28899cb1b4ae86ea428232926dbdd98fdb30022a6e8ad890f58d9"
-maintainer="WRM-42 <y8bsbahy@anonaddy.me>"
+hash="343f412f3a4e9a405251151d0d7d889709d3e5cb974e0cc6aee303b4a0e41f25"
+arch=('amd64')
 repology=("project: ${gives}")
