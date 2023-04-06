@@ -2,27 +2,21 @@ maintainer="Paul Cosma (saenai) <paul.cosma97@gmail.com>"
 
 pkgname="tutanota"
 name="${pkgname}-app"
-version="3.89.25"
+version="3.106.4"
 description="Tutanota is the world's most secure email service, easy to use and private by design."
 url="https://mail.tutanota.com/desktop/tutanota-desktop-linux.AppImage"
 __icon_url="https://icons-for-free.com/download-icon-super+tiny+icons+tutanota-1324450784669328293_256.png"
-__icon_hash="e76f83c33cab7c3b1e7d4c827927e0c883bc7f41cb2e2f3ce7d493cd96970d76"
+__icon_hash="06c8fc033557d9b279f21af4c2e7d925145487e552d94f59ddae5c0e42979c13"
 breaks="${pkgname}-deb ${pkgname}-bin ${pkgname}-git ${pkgname}"
 gives="${pkgname}"
 replace="${pkgname}"
-
-prepare() {
-  true
-}
-
-build() {
-  true
-}
+hash="7b1942f94af8e6a8fc6308d29718ef62be76e7f66a4ce35e105770b0f5855cb1"
+repology=("project: tutanota" "repo: homebrew_casks")
 
 __created_desktop_file="yes"
 install() {
   # Install AppImage
-  sudo install -Dm755 "tutanota-desktop-linux.AppImage" "${STOWDIR}/${name}/usr/bin/${pkgname}"
+  sudo install -Dm755 "tutanota-desktop-linux.AppImage" "${pkgdir}/usr/bin/${pkgname}"
 
   if ask "\nTutanota creates its own desktop file during the first launch.\nDo you want to create a desktop file anyway?" N; then
     # Download icon
@@ -30,13 +24,13 @@ install() {
     actual_icon_hash="$(sha256sum "${pkgname}.png" | grep -o "[a-z0-9]*" | head -1)"
 
     # Check hash
-    if [ "${__icon_hash}" != "${actual_icon_hash}" ]; then
+    if [[ ${__icon_hash} != "${actual_icon_hash}" ]]; then
       echo "Error! Tutanota icon hash mismatch"
       return 1
     fi
 
     # Install .desktop file
-    sudo install -Dm644 "${pkgname}.png" "${STOWDIR}/${name}/usr/share/pixmaps/${pkgname}.png"
+    sudo install -Dm644 "${pkgname}.png" "${pkgdir}/usr/share/pixmaps/${pkgname}.png"
     wget -q "https://raw.githubusercontent.com/pacstall/pacstall-programs/master/packages/${name}/${pkgname}.desktop"
     sudo install -Dm644 "${pkgname}.desktop" "${pkgdir}/usr/share/applications/${pkgname}.desktop"
   else
@@ -46,7 +40,7 @@ install() {
 
 postinst() {
   # Return early if nothing else to do
-  if [ "${__created_desktop_file}" = "yes" ]; then
+  if [[ ${__created_desktop_file} == "yes" ]]; then
     return 0
   fi
 
