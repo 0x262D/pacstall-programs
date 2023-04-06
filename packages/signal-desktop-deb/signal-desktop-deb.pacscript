@@ -1,11 +1,11 @@
 name="signal-desktop-deb"
 pkgname="signal-desktop"
 gives="${pkgname}"
-replace="${pkgname}"
 breaks="${pkgname}-app"
 repology=("project: ${pkgname}")
-version="5.59.0"
+version="6.12.0"
 url="https://updates.signal.org/desktop/apt/pool/main/s/${gives}/${gives}_${version}_amd64.deb"
 description="Signal Private Messenger for Linux"
-hash="ea29bc387d49f98956099e5e78925b5e89103ece906c8cd82289c6cbdbdb5af1"
+hash="9e152bc70704e77406d9a9121c214a251eb6c9dc19edde0b23e978a356e0289a"
+arch=('amd64')
 maintainer="Jon Banafato <pacstall@jonafato.com>"

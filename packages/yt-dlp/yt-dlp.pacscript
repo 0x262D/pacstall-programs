@@ -1,14 +1,13 @@
 name="yt-dlp"
 repology=("project: ${name}")
-version="2022.08.19"
+version="2023.02.17"
 url="https://github.com/${name}/${name}/archive/refs/tags/${version}.tar.gz"
-build_depends="make pandoc zip python3-pytest python3-setuptools"
+build_depends="make pandoc zip python3-pytest python3-setuptools python3-pip"
 optdepends=("mpv: For downloading rstp streams")
-depends="python3 ffmpeg python3-mutagen python3-pip python3-websockets python3-secretstorage python3-brotli python3-certifi python3-xattr atomicparsley rtmpdump"
+depends="python3 ffmpeg python3-mutagen python3-websockets python3-secretstorage python3-brotli python3-certifi python3-xattr atomicparsley rtmpdump"
 breaks="${name}-git ${name}-bin ${name}"
 description="A youtube-dl fork with additional features and fixes"
-hash="8fbb5193d03f3a2c6098b9bdd08a8a856f5d75a071785366fe84c4efe18bf391"
-maintainer="WRM-42 <y8bsbahy@anonaddy.me>"
+hash="37b74a5d88036205e70b38d230930825bfa1798cb24d7e5f2670799f0d47e2be"
 
 prepare() {
   sudo pip3 install --upgrade pycryptodomex
@@ -20,9 +19,9 @@ build() {
 }
 
 install() {
-  sudo python3 setup.py install --root="${STOWDIR}/${name}" --optimize=1
+  sudo python3 setup.py install --root="${pkgdir}" --optimize=1
 }
 
 removescript() {
-  sudo pip3 uninstall pycryptodomex
+  yes | sudo pip3 uninstall pycryptodomex
 }
