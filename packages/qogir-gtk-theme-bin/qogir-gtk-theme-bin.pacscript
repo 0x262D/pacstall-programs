@@ -8,14 +8,13 @@ maintainer="wizard-28 <wiz28@pm.me>"
 
 name="qogir-gtk-theme-bin"
 pkgname="qogir-gtk-theme"
-pkgdir="${STOWDIR}/${name}"
-version="2021-12-25"
+version="2022-11-09"
 description="Qogir is a flat Design theme for GTK"
 url="https://github.com/vinceliuice/Qogir-theme/archive/${version}.tar.gz"
-depends="gtk3-engines-unico gtk2-engines-murrine gtk2-engines-pixbuf"
+depends="gtk2-engines-murrine gtk2-engines-pixbuf"
 build_depends="libsass1"
 breaks="${pkgname} ${pkgname}-git ${pkgname}-deb ${pkgname}-app"
-hash="fb6b55b88dd6d69814ccd877efc227f3f62c4c73d1cf407bb02d5b93ee345023"
+hash="0075412e14ca9cc012b7eb7fc302524d82af8e872e2f139cddb4ec80201ebe41"
 repology=("project: qogir-theme" "repo: nix_unstable")
 
 # To specify flags for theme installation you have two options
@@ -24,10 +23,6 @@ repology=("project: qogir-theme" "repo: nix_unstable")
 # NOTE: _INSTALL_OPTS will override /etc/qogir-gtk-theme/options.txt (if it exists) temporarily
 # Otherwise, if none of the options are used. The script will proceed with the default installation
 _INSTALL_OPTS=
-
-prepare() {
-  true
-}
 
 build() {
   # Parse install flags from /etc/qogir-gtk-theme/options.txt, if it exists and _INSTALL_OPTS has not been set
